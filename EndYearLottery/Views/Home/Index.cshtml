@@ -1,0 +1,118 @@
+﻿@using Newtonsoft.Json.Linq
+@model JArray
+@{
+    ViewData["Title"] = "Lottery";
+}
+@section Styles{
+	<link rel="stylesheet" href="~/lib/multiple-select/css/bootstrap-select.css" />
+}
+@section Scripts{
+	<script src="/lib/multiple-select/js/bootstrap-select.js"></script>
+	<script src="/js/lottery.js" asp-append-version="true"></script>
+
+}
+<div class="container">
+	<div class="col-lg-12 col-md-12 col-sm-12">
+		<div class="row">
+			<div class="col-lg-9 col-md-12 col-sm-12 mr">
+				<label for="present-list" class="label-size">獎品清單</label>
+				<select id="present-list" class="selectpicker form-control" title="選擇獎品項目" >
+					@foreach (var item in @Model){
+						string present      = item["present"].ToString();
+						string sponsor   	= item["sponsor"].ToString();
+						string amount   	= item["amount"].ToString();         
+						string empInfo 		= $"{present} - {sponsor}";
+						<option value="@amount">@empInfo</option>
+					}
+				</select>
+			</div>
+			<div class="col-lg-3 col-md-12 col-sm-12 mr">
+				<label for="present-amount" class="label-size">抽獎數量</label>
+				<select id="present-amount" class="selectpicker form-control" title="選擇數量">
+				</select>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-lg-12 col-md-12 col-sm-12 mr">
+				<label for="winner-area" class="label-size">中獎列表</label>
+				<textarea id="winner-area"  class="textarea-width" rows="12" disabled ></textarea>
+			</div>	
+		</div>
+		<div class="row">
+			<div class="col-lg-6 col-md-12 col-sm-12 mr">
+				<button id="draw-button" type="button" class="btn btn-info mr" align="center">抽獎按鈕</button>
+				<button id="winner-list-btn" type="button" class="btn btn-info mr" align="center" style="background : #539f53">中獎清單</button>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-lg-6 col-md-12 col-sm-12 mr">
+				<button id="delete-winner-button" type="button" class="btn btn-info mr" align="center">清除中獎清單</button>
+			</div>
+		</div>	
+		<div class="row">
+			<div class="col-lg-12 col-md-12 col-sm-12 mr">
+				<button id="present-upload-btn" type="button" class="btn btn-info mr"  
+					data-toggle="modal" data-target="#bonus-modal">加碼區</button>	
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- Modal -->
+<div id="winner-list-modal" class="modal fade" role="dialog">
+	<div class="modal-dialog">
+		<!-- Modal content-->
+		<div class="modal-content">
+			<div class="modal-header">
+				<label for="winner-list" class="label-size">中獎列表</label>
+			</div>
+			<div class="modal-body">
+				<textarea id="winner-list" rows="12" class="textarea-width" disabled ></textarea>
+			</div>
+			<div class="modal-footer">
+				<a id="export-winner-modal-btn" class="btn btn-danger bg-color-darkred" asp-controller="Home" asp-action="ExportWinnerList">
+					<i class="fas fa-file-export"></i>
+					<span class="d-none d-lg-inline-block">匯出</span>
+				</a>
+				<button type="button" class="btn btn-default" data-dismiss="modal">關閉</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="bonus-modal" class="modal fade" role="dialog">
+	<div class="modal-dialog">
+		<!-- Modal content-->
+		<div class="modal-content">
+			<div class="modal-header">
+				<label for="winner-list" class="label-size">中獎列表</label>
+			</div>
+			<div class="modal-body">
+				<div class="row">
+					<div class="col-lg-4 col-md-12 col-sm-12 mr">
+						<label>加碼獎品</label>
+						<input id="bonus-present" type="text" class="form-control" maxlength="20">
+					</div>
+					<div class="col-lg-4 col-md-12 col-sm-12 mr">
+						<label>數量</label>
+						<input id="bonus-amount" type="text" class="form-control" maxlength="20">
+					</div>
+					<div class="col-lg-4 col-md-12 col-sm-12 mr">
+						<label>獎項來源</label>
+						<input id="bonus-sponsor" type="text" class="form-control" maxlength="20">
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-lg-12 col-md-12 col-sm-12 mr">
+						<label for="bonus-winner-area" class="label-size">中獎列表</label>
+						<textarea id="bonus-winner-area" rows="12" class="textarea-width" disabled></textarea>
+					</div>	
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button id="bonus-draw-button" type="button" class="btn btn-info" align="center">加碼瞜</button>
+				<button type="button" class="btn btn-default" data-dismiss="modal">關閉</button>
+			</div>
+		</div>
+	</div>
+</div>

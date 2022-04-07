@@ -1,0 +1,32 @@
+{
+    "status": {
+        "fail": "fail",
+        "success": "success"
+    },
+    "message": {
+        "noEmpCanDraw": "人員沒人可以抽瞜",
+        "winningMessage": "恭喜得獎者",
+        "exceptionMessage": "錯誤 請聯絡相關人員協助",
+        "deleteSuccess": "成功刪除",
+        "insertSuccess": "新增成功",
+        "updateSuccess": "修改成功",
+        "clearWinnerListSuccess":"清除成功"
+    },
+    "importMessage":{
+        "fileEmpty": "匯入員工資料失敗，檔案不能為空",
+        "fileTypeError": "匯入員工資料失敗，檔案副檔名要為xls, xlsx",
+        "columnFail":"匯入員工資料失敗，欄位與設定檔不符",
+        "importSuccess":"匯入員工資料成功"
+    },
+    "employeeExcelColumn": {
+        "部門": "department",
+        "員工代碼": "empNumber",
+        "姓名": "empName"
+    },
+    "presentExcelColumn": {
+        "No":"presendId",
+        "獎品": "present",
+        "數量": "amount",
+        "贊助來源": "sponsor"
+    }
+}

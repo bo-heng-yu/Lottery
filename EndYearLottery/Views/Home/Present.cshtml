@@ -1,0 +1,133 @@
+﻿@using Newtonsoft.Json.Linq
+@model JArray
+@{
+    ViewData["Title"] 	= "獎項清單";
+	int index 			= 1;
+}
+@section Styles{
+}
+@section Scripts{
+	<script src="/js/present.js" asp-append-version="true"></script>
+}
+<div class="container">
+	<div class="row">
+		<div class="col-lg-12 col-md-12 col-sm-12">
+			<div class="col-lg-12 col-md-12 col-sm-12 mr">
+				<label for="add-present-btn" class="label-size">獎項清單</label>
+				<div class="row">
+					<div class="col-lg-12 col-md-12 col-sm-12 mr">
+						<button id="import-modal-btn" type="button" class="btn btn-info mr" 
+							data-toggle="modal" data-target="#present-import-modal">匯入功能</button>
+					</div>		
+				</div>								
+				<div class="row">
+					<div class="col-lg-2 col-md-12 col-sm-12 mr">	
+						<button id="add-present-btn" type="button" class="btn btn-info add-btn">新增獎項</button>							
+					</div>
+					<div class="col-lg-2 col-md-12 col-sm-12 mr">	
+						<label>流水號</label>			
+					</div>
+					<div class="col-lg-2 col-md-12 col-sm-12 mr">
+						<label>獎項</label>
+					</div>
+					<div class="col-lg-2 col-md-12 col-sm-12 mr">
+						<label>數量</label>
+					</div>
+					<div class="col-lg-2 col-md-12 col-sm-12 mr">
+						<label>來源</label>
+					</div>
+					<div class="col-lg-2 col-md-12 col-sm-12 mr">
+						<label>操作</label>
+					</div>
+				</div>
+			@foreach (var item in @Model){
+				
+				<div class="row" id="row-present-@item["presentId"]">
+					<div class="col-lg-2 col-md-12 col-sm-12 mr"></div>
+					<div class="col-lg-2 col-md-12 col-sm-12 mr">@index</div>
+					<div class="col-lg-2 col-md-12 col-sm-12 mr present">@item["present"]</div>
+					<div class="col-lg-2 col-md-12 col-sm-12 mr amount">@item["amount"]</div>
+					<div class="col-lg-2 col-md-12 col-sm-12 mr sponsor">@item["sponsor"]</div>
+					<div class="col-lg-2 col-md-12 col-sm-12 mr">@Html.Raw(item["operateBtn"])</div>
+				</div>
+				index ++;
+			}
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- Modal -->
+<div id="add-present-modal" class="modal fade" role="dialog">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<label for="winner-list" class="label-size">新增獎項</label>
+			</div>
+			<div class="row modal-mr">
+				<div class="col-lg-4 col-md-12 col-sm-12">
+					<label>獎項</label>
+					<input id="add-present" type="text" class="form-control" maxlength="20">
+				</div>
+				<div class="col-lg-4 col-md-12 col-sm-12">
+					<label>來源</label>
+					<input id="add-sponsor" type="text" class="form-control" maxlength="20">
+				</div>
+				<div class="col-lg-4 col-md-12 col-sm-12">
+					<label>數量</label>
+					<input id="add-present-amount" type="text" class="form-control" maxlength="20"
+							onkeyup="value=value.replace(/[^\d]/g,'')">
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button id="add-present-comfirm" type="button" class="btn btn-primary" >確定</button>
+				<button type="button" class="btn btn-default" data-dismiss="modal">關閉</button>
+			</div>
+		</div>
+	</div>
+</div>
+<div id="edit-present-modal" class="modal fade" role="dialog">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<label for="winner-list" class="label-size">修改獎項</label>
+			</div>
+			<div class="row modal-mr">
+				<div class="col-lg-4 col-md-12 col-sm-12">
+					<label>獎項</label>
+					<input id="edit-present" type="text" class="form-control" maxlength="20">
+				</div>
+				<div class="col-lg-4 col-md-12 col-sm-12">
+					<label>來源</label>
+					<input id="edit-sponsor" type="text" class="form-control" maxlength="20">
+				</div>
+				<div class="col-lg-4 col-md-12 col-sm-12">
+					<label>數量</label>
+					<input id="edit-present-amount" type="text" class="form-control" maxlength="20"
+							onkeyup="value=value.replace(/[^\d]/g,'')">
+				</div>
+				<input id="edit-present-id" type="hidden">
+			</div>
+			<div class="modal-footer">
+				<button id="edit-present-comfirm" type="button" class="btn btn-primary" >確定</button>
+				<button type="button" class="btn btn-default" data-dismiss="modal">關閉</button>
+			</div>
+		</div>
+	</div>
+</div>
+<div id="present-import-modal" class="modal fade" role="dialog">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<label class="label-size">匯入獎項<br><span class="import-rule">規則說明:Excel第一行需有"獎項.數量.來源"</label>
+			</div>
+				<div>
+					<input class="mr" type="file" id="present-upload-file"/>
+				</div>
+			<div class="modal-footer">
+				<button id="present-upload-btn" type="button"class="btn btn-info">匯入</button>	
+				<button type="button" class="btn btn-default" data-dismiss="modal">關閉</button>
+			</div>
+		</div>
+	</div>
+</div>

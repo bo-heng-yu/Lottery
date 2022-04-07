@@ -1,0 +1,84 @@
+/* #lottery{width:570px;height:510px;margin:0px auto;}
+#lottery table{background-color:yellow;}
+#lottery table td{position:relative;width:190px;height:170px;text-align:center;color:#333;font-index:-999}
+#lottery table td img{display:block;width:190px;height:170px;}
+#lottery table td a{width:190px;height:170px;display:block;text-decoration:none;background-color:#fff}
+#lottery table td a:hover{background-color:#ddd}
+#lottery table td.active .mask{display:block;} */
+p{
+	font-family: Microsoft JhengHei;
+	font-size:24px;
+}
+span{
+	font-size: 20px;
+}
+body{
+	background-image: url(../bg/lottery_bg.jpg);
+	background-repeat: no-repeat;
+	background-size: 100%;
+}
+.footer{
+	position: fixed;
+	bottom: 0;
+	background-color: #f2fff7;
+	width: 100%;
+}
+#lottery div.active .mask{display:block;}
+.lottery-unit {
+	font-size : 16px;
+	margin: 10px;
+}
+.mask{
+    width:100%;
+    height:100%;
+    position:absolute;
+    left:0;
+    top:0;
+    background-image: url(../ico/target.jpg);
+    background-position:90%;
+    background-size:contain;
+    background-color: rgba(252,211,4,0.5);
+    background-repeat: no-repeat;
+    display:none;
+}
+.lottery-item{
+	background-color:#32cd32;
+	text-align: center;
+	border: solid 1px;
+	width:70%;
+	height:100%;
+}
+.lottery-item span::before{
+	content:'';
+  	width:0;
+  	height:100%;
+  	display:inline-block;
+  	position:relative;
+  	vertical-align:middle;
+}
+.prize-item{
+	border-bottom : solid 1px;
+}
+.prize-item.active{
+	background-color:#e6e6fa;
+}
+.shake-award {
+	/* Start the shake animation and make the animation last for 0.5 seconds */
+	animation: shake 0.5s;
+
+	/* When the animation is finished, start again */
+	animation-iteration-count: infinite;
+}
+@keyframes shake {
+  0% { transform: translate(1px, 1px) rotate(0deg); }
+  10% { transform: translate(-1px, -2px) rotate(-1deg); }
+  20% { transform: translate(-3px, 0px) rotate(1deg); }
+  30% { transform: translate(3px, 2px) rotate(0deg); }
+  40% { transform: translate(1px, -1px) rotate(1deg); }
+  50% { transform: translate(-1px, 2px) rotate(-1deg); }
+  60% { transform: translate(-3px, 1px) rotate(0deg); }
+  70% { transform: translate(3px, 1px) rotate(-1deg); }
+  80% { transform: translate(-1px, -1px) rotate(1deg); }
+  90% { transform: translate(1px, 2px) rotate(0deg); }
+  100% { transform: translate(1px, -2px) rotate(-1deg); }
+}

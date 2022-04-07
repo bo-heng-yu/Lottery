@@ -1,0 +1,107 @@
+﻿@using Newtonsoft.Json.Linq
+@model JArray
+@{
+    ViewData["Title"] = "員工清單";
+}
+@section Styles{
+}
+@section Scripts{
+	<script src="/js/lottery.js" asp-append-version="true"></script>
+	<script src="/js/employee.js" asp-append-version="true"></script>
+}
+<div class="container">
+	<div class="row">
+		<div class="col-lg-12 col-md-12 col-sm-12">
+			<div class="col-lg-12 col-md-12 col-sm-12 mr">
+				<label for="add-employee-btn" class="label-size">人員清單</label>
+				<div class="row">
+					<div class="col-lg-12 col-md-12 col-sm-12 mr">
+						<button id="import-modal-btn" type="button" class="btn btn-info mr" 
+							data-toggle="modal" data-target="#employee-import-modal">匯入功能</button>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-lg-2 col-md-12 col-sm-12 mr">
+						<button id="add-employee-btn" type="button" class="btn btn-info add-btn">新增人員</button>
+					</div>
+					<div class="col-lg-2 col-md-12 col-sm-12 mr">
+						<label>員工代碼</label>
+					</div>
+					<div class="col-lg-2 col-md-12 col-sm-12 mr">
+						<label>姓名</label>
+					</div>
+					<div class="col-lg-2 col-md-12 col-sm-12 mr">
+						<label>職稱</label>
+					</div>
+					<div class="col-lg-2 col-md-12 col-sm-12 mr">
+						<label>部門</label>
+					</div>
+					<div class="col-lg-2 col-md-12 col-sm-12 mr">
+						<label>操作</label>
+					</div>
+				</div>
+			@foreach (var item in @Model){
+				<div class="row" id="row-employee-@item["empNumber"]">
+					<div class="col-lg-2 col-md-12 col-sm-12 mr"></div>
+					<div class="col-lg-2 col-md-12 col-sm-12 mr empNumber">@item["empNumber"]</div>
+					<div class="col-lg-2 col-md-12 col-sm-12 mr empName">@item["empName"]</div>
+					<div class="col-lg-2 col-md-12 col-sm-12 mr jobTitle">@item["jobTitle"]</div>
+					<div class="col-lg-2 col-md-12 col-sm-12 mr department">@item["department"]</div>
+					<div class="col-lg-2 col-md-12 col-sm-12 mr">@Html.Raw(item["operateBtn"])</div>
+				</div>
+			}
+			</div>
+		</div>
+	</div>
+</div>
+<!-- Modal -->
+<div id="add-employee-modal" class="modal fade" role="dialog">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<label class="label-size">新增人員</label>
+			</div>
+			<div class="row modal-mr">
+				<div class="col-lg-6 col-md-12 col-sm-12">
+					<label>員工編號</label>
+					<input id="add-employee-number" type="text" class="form-control" maxlength="20">
+				</div>
+				<div class="col-lg-6 col-md-12 col-sm-12">
+					<label>員工姓名</label>
+					<input id="add-employee-name" type="text" class="form-control" maxlength="20">
+				</div>
+			</div>
+			<div class="row modal-mr">
+				<div class="col-lg-6 col-md-12 col-sm-12">
+					<label>職稱</label>
+					<input id="add-employee-jobtitle" type="text" class="form-control" maxlength="20">
+				</div>
+				<div class="col-lg-6 col-md-12 col-sm-12">
+					<label>部門</label>
+					<input id="add-employee-department" type="text" class="form-control" maxlength="20">
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button id="add-employee-comfirm" type="button" class="btn btn-primary" >確定</button>
+				<button type="button" class="btn btn-default" data-dismiss="modal">關閉</button>
+			</div>
+		</div>
+	</div>
+</div>
+<div id="employee-import-modal" class="modal fade" role="dialog">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<label class="label-size">匯入人員<br><span class="import-rule">規則說明:Excel第一行需有"員工代碼.姓名.職稱.部門"</label>
+			</div>
+				<div>
+					<input class="mr" type="file" id="employee-upload-file"/>
+				</div>
+			<div class="modal-footer">
+				<button id="employee-upload-btn" type="button"class="btn btn-info">匯入</button>	
+				<button type="button" class="btn btn-default" data-dismiss="modal">關閉</button>
+			</div>
+		</div>
+	</div>
+</div>
+
