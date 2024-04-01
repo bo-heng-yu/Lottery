@@ -1,8 +1,8 @@
 apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
-  name: liontravel-backstage
-  description: An example of a Backstage application.
+  name: liontravel-backstage00
+  description: An example of a Backstage application00.
 spec:
   type: service
   owner: heng
